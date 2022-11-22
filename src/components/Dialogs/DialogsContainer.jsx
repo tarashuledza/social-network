@@ -1,27 +1,19 @@
 import React from 'react';
-import s from './Dialogs.module.css';
-import DialogItem from "./DialogItem/DialogItem";
-import Message from "./Message/Message";
-import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs-reducer";
+import {
+    sendMessage,
+    updateNewMessage,
+} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
+import {withAuthNavigate} from "../HOC/withAuthNavigate";
+import {compose} from "redux";
 
-let mapState = (state) => {
+let mapStateToProps = (state) => {
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
     }
 }
-let mapDispatch = (dispatch) => {
-    return {
-        sendMessage: () => {
-            dispatch(sendMessageCreator());
-        },
-        updateNewMessage: (body) => {
-            dispatch(updateNewMessageBodyCreator(body));
-        }
-    }
-}
-
-const DialogsContainer = connect(mapState, mapDispatch)(Dialogs);
-
-export default DialogsContainer;
+export default compose(
+    connect(mapStateToProps, {sendMessage, updateNewMessage}),
+    withAuthNavigate
+)(Dialogs);

@@ -4,6 +4,7 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 
 const Dialogs = (props) => {
+    debugger
     let dialogsElements = props.dialogsPage.dialogs.map( d => <DialogItem key={d.id} name={d.name} id={d.id} />  );
     let messagesElements = props.dialogsPage.messages.map( m => <Message key={m.id} message={m.message} /> );
     let newMessageBody = props.dialogsPage.newMessageBody;
@@ -16,6 +17,7 @@ const Dialogs = (props) => {
         let body = e.target.value;
         props.updateNewMessage(body);
     }
+
 
     return (
         <div className={s.dialogs}>

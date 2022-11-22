@@ -1,5 +1,4 @@
 import {userAPI} from "../API/API";
-import axios from "axios";
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";

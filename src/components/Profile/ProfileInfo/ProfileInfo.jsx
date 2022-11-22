@@ -1,6 +1,8 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
 import Loader from "../../../Loader";
+import ProfileStatus from "./ProfileStatus";
+
 
 const ProfileInfo = (props) => {
     if(!props.profile) {
@@ -15,7 +17,7 @@ const ProfileInfo = (props) => {
                 {props.profile.fullName}
             </div>
             <div>
-                {props.profile.aboutMe}
+                <ProfileStatus status={"Ya crazy!!!"}/>
             </div>
         </div>
     )

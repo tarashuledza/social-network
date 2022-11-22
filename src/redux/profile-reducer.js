@@ -12,7 +12,7 @@ let initialState = {
         {id: 4, message: 'yoyo', likesCount: 11}
     ],
     newPostText: '',
-    profile: undefined
+    profile: undefined,
 }
 
 const profileReducer = (state = initialState, action) => {

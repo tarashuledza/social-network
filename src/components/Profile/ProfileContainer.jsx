@@ -4,10 +4,13 @@ import Profile from "./Profile";
 import axios from "axios";
 import {setUserProfile, setUserProfileSuccess} from "../../redux/profile-reducer";
 import {
+    Navigate,
     useLocation,
     useNavigate,
     useParams,
 } from "react-router-dom";
+import {withAuthNavigate} from "../HOC/withAuthNavigate";
+import {compose} from "redux";
 
 function withRouter(ProfileContainer) {
     function ComponentWithRouterProp(props) {
@@ -24,12 +27,18 @@ class ProfileContainer extends React.Component {
         let userId = this.props.router.params.userId;
         this.props.setUserProfile(userId);
     }
-
     render(){
         return <Profile {...this.props} profile={this.props.profile}/>
     }
 }
+
 const mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
+    isAuth: state.auth.isAuth
 })
-export default connect(mapStateToProps, { setUserProfile, setUserProfileSuccess})(withRouter(ProfileContainer));
+
+export default compose(
+    connect(mapStateToProps, {setUserProfile, setUserProfileSuccess}),
+    withRouter,
+    withAuthNavigate
+)(ProfileContainer);
